@@ -1,0 +1,19 @@
+# -*- coding: utf-8 -*-
+
+import urllib
+
+
+def print_list(list):
+
+    for i in list:
+
+        print(i)
+
+
+def retrieve():
+
+    urllib.urlretrieve('https://baike.baidu.com/pic/%E5%9F%BA%E7%89%B9%C2%B7%E5%93%88%E7%81%B5%E9%A1%BF/1029038/0/dc54564e9258d109ed2aa2d4d858ccbf6d814d8e?fr=lemma&ct=single#aid=0&pic=dc54564e9258d109ed2aa2d4d858ccbf6d814d8e','index.html')
+
+
+if __name__ == '__main__':
+    retrieve()
