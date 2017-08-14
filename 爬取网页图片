@@ -1,0 +1,25 @@
+#coding=utf-8
+
+#urllib模块提供了读取Web页面数据的接口
+import urllib2
+#re模块主要包含了正则表达式
+import re
+#定义一个getHtml()函数
+def getHtml(url):
+    page = urllib2.urlopen(url)  #urllib2.urlopen()方法用于打开一个URL地址
+    html = page.read() #read()方法用于读取URL上的数据
+    return html
+
+def getImg(html):
+    reg = r'src="(.+?\.jpg)",size' #正则表达式,得到图片地址
+    imgre = re.compile(reg)     #re.compile() 可以把正则表达式编译成一个正则表达式对象.
+    imglist = re.findall(imgre,html)      #re.findall() 方法读取html 中包含 imgre（正则表达式）的数据
+    #把筛选的图片地址通过for循环遍历并保存到本地
+    #核心是urllib.urlretrieve()方法,直接将远程数据下载到本地，图片通过x依次递增命名
+    x = 0
+    for imgurl in imglist:
+        urllib2.urlretrieve(imgurl,'C:\python picture'+ '%s.jpg'%x)    #自定义下载的图片的存贮路径,首先在C盘下创建python picture这个文件夹
+        x = x + 1
+
+html = getHtml("https://baike.baidu.com/pic/%E5%9F%BA%E7%89%B9%C2%B7%E5%93%88%E7%81%B5%E9%A1%BF/1029038/0/dc54564e9258d109ed2aa2d4d858ccbf6d814d8e?fr=lemma&ct=single#aid=0&pic=dc54564e9258d109ed2aa2d4d858ccbf6d814d8e");
+print getImg(html)
